@@ -1,0 +1,52 @@
+CREATE DATABASE employee_management;
+USE employee_management;
+
+CREATE TABLE department (
+    id INT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE employee (
+    id INT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    age INT NOT NULL,
+    department_id INT NOT NULL,
+    FOREIGN KEY (department_id) REFERENCES department(id)
+);
+
+INSERT INTO department VALUES (1, 'HR');
+INSERT INTO department VALUES (2, 'IT');
+INSERT INTO department VALUES (3, 'Finance');
+
+INSERT INTO employee VALUES (1, 'Nhu Anh', 24, 1);
+INSERT INTO employee VALUES (2, 'Anh Nhu', 24, 1);
+INSERT INTO employee VALUES (3, 'Truong Linh', 22, 3);
+INSERT INTO employee VALUES (4, 'Ning Truong', 22, 3);
+INSERT INTO employee VALUES (5, 'Trong Hieu', 32, 2);
+
+SELECT * FROM department;
+SELECT name FROM department;
+SELECT * FROM employee;
+SELECT * FROM employee WHERE department_id = 1;
+
+DELETE FROM employee WHERE id = 5;
+
+UPDATE employee SET name = 'Linh Truong' WHERE id = 4;
+
+ALTER TABLE department
+ADD PRIMARY KEY (id);
+
+ALTER TABLE employee
+ADD PRIMARY KEY (id);
+
+ALTER TABLE employee
+ADD COLUMN department_id INT;
+
+UPDATE employee SET department_id = 1;
+
+UPDATE employee SET department_id = 2 WHERE name LIKE '%Nhu%';
+
+ALTER TABLE employee
+DROP COLUMN department_id;
+
+DROP DATABASE employee_management;
